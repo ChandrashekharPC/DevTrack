@@ -1,46 +1,37 @@
-import { useNavigate } from "react-router-dom";
+import "./Navbar.css";
 
-function Navbar() {
+import {
+    FaBell,
+    FaSearch,
+    FaUserCircle
+} from "react-icons/fa";
 
-    const navigate = useNavigate();
+function Navbar(){
 
-    const handleLogout = () => {
+    return(
 
-        // Remove JWT Token
-        localStorage.removeItem("token");
+        <div className="navbar">
 
-        // Redirect to Login
-        navigate("/");
+            <div className="search-box">
 
-    };
+                <FaSearch/>
 
-    return (
+                <input
+                    type="text"
+                    placeholder="Search..."
+                />
 
-        <div
-            style={{
-                height: "60px",
-                background: "#1976d2",
-                color: "white",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                padding: "0 25px"
-            }}
-        >
+            </div>
 
-            <h2>DevTrack</h2>
+            <div className="navbar-right">
 
-            <button
-                onClick={handleLogout}
-                style={{
-                    padding: "8px 18px",
-                    border: "none",
-                    borderRadius: "6px",
-                    cursor: "pointer"
-                }}
-            >
-                Logout
-            </button>
+                <FaBell className="nav-icon"/>
+
+                <FaUserCircle className="profile-icon"/>
+
+                <span>Chandrashekhar</span>
+
+            </div>
 
         </div>
 
