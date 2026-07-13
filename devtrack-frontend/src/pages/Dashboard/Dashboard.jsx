@@ -1,0 +1,67 @@
+import DashboardLayout from "../../layouts/DashboardLayout";
+import StatCard from "../../components/StatCard";
+
+import {
+  FaUsers,
+  FaProjectDiagram,
+  FaTasks,
+  FaCheckCircle
+} from "react-icons/fa";
+
+function Dashboard() {
+
+  return (
+
+    <DashboardLayout>
+
+      <h1>Welcome Back 👋</h1>
+
+      <p style={{color:"#777",marginBottom:"30px"}}>
+        Here's what's happening today.
+      </p>
+
+      <div
+        style={{
+          display:"grid",
+          gridTemplateColumns:"repeat(auto-fit,minmax(250px,1fr))",
+          gap:"25px"
+        }}
+      >
+
+        <StatCard
+          title="Users"
+          value="12"
+          color="#2563EB"
+          icon={<FaUsers />}
+        />
+
+        <StatCard
+          title="Projects"
+          value="6"
+          color="#22C55E"
+          icon={<FaProjectDiagram />}
+        />
+
+        <StatCard
+          title="Tasks"
+          value="48"
+          color="#F59E0B"
+          icon={<FaTasks />}
+        />
+
+        <StatCard
+          title="Completed"
+          value="32"
+          color="#EF4444"
+          icon={<FaCheckCircle />}
+        />
+
+      </div>
+
+    </DashboardLayout>
+
+  );
+
+}
+
+export default Dashboard;
