@@ -1,6 +1,8 @@
 import DashboardLayout from "../../layouts/DashboardLayout";
 import StatCard from "../../components/StatCard";
 
+import WelcomeBanner from "../../components/WelcomeBanner";
+
 import {
   FaUsers,
   FaProjectDiagram,
@@ -14,11 +16,7 @@ function Dashboard() {
 
     <DashboardLayout>
 
-      <h1>Welcome Back 👋</h1>
-
-      <p style={{color:"#777",marginBottom:"30px"}}>
-        Here's what's happening today.
-      </p>
+      <WelcomeBanner />
 
       <div
         style={{

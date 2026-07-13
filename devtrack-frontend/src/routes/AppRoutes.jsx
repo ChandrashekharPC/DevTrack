@@ -8,6 +8,8 @@ import Tasks from "../pages/Tasks/Tasks";
 
 import Register from "../pages/Login/Register";
 
+import ProtectedRoute from "./ProtectedRoute";
+
 
 
 function AppRoutes() {
@@ -19,14 +21,41 @@ function AppRoutes() {
                 <Route path="/register" element={<Register />} />
 
 
-                <Route path="/dashboard" element={<Dashboard />} />
+                <Route
+                    path="/dashboard"
+                    element={
+                        <ProtectedRoute>
+                            <Dashboard />
+                        </ProtectedRoute>
+                    }
+                />
 
-                <Route path="/users" element={<Users />} />
+                <Route
+                    path="/users"
+                    element={
+                        <ProtectedRoute>
+                            <Users />
+                        </ProtectedRoute>
+                    }
+                />
 
-                <Route path="/projects" element={<Projects />} />
+                <Route
+                    path="/projects"
+                    element={
+                        <ProtectedRoute>
+                            <Projects />
+                        </ProtectedRoute>
+                    }
+                />
 
-                <Route path="/tasks" element={<Tasks />} />
-
+                <Route
+                    path="/tasks"
+                    element={
+                        <ProtectedRoute>
+                            <Tasks />
+                        </ProtectedRoute>
+                    }
+                />
             </Routes>
         </BrowserRouter>
     );

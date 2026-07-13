@@ -1,59 +1,52 @@
-import { Link } from "react-router-dom";
+import {
+  FaHome,
+  FaUsers,
+  FaProjectDiagram,
+  FaTasks,
+  FaCog
+} from "react-icons/fa";
+
+import { NavLink } from "react-router-dom";
+
+import "./Sidebar.css";
 
 function Sidebar() {
+
   return (
-    <div
-      style={{
-        width: "220px",
-        background: "#2c3e50",
-        color: "white",
-        minHeight: "100vh",
-        paddingTop: "20px",
-      }}
-    >
-      <h2 style={{ textAlign: "center" }}>Menu</h2>
 
-      <ul style={{ listStyle: "none", padding: "20px" }}>
+    <div className="sidebar">
 
-        <li style={{ marginBottom: "20px" }}>
-          <Link
-            to="/dashboard"
-            style={{ color: "white", textDecoration: "none" }}
-          >
-            Dashboard
-          </Link>
-        </li>
+      <h2 className="logo">DevTrack</h2>
 
-        <li style={{ marginBottom: "20px" }}>
-          <Link
-            to="/users"
-            style={{ color: "white", textDecoration: "none" }}
-          >
-            Users
-          </Link>
-        </li>
+      <NavLink to="/dashboard" className="menu-item">
+        <FaHome />
+        <span>Dashboard</span>
+      </NavLink>
 
-        <li style={{ marginBottom: "20px" }}>
-          <Link
-            to="/projects"
-            style={{ color: "white", textDecoration: "none" }}
-          >
-            Projects
-          </Link>
-        </li>
+      <NavLink to="/users" className="menu-item">
+        <FaUsers />
+        <span>Users</span>
+      </NavLink>
 
-        <li>
-          <Link
-            to="/tasks"
-            style={{ color: "white", textDecoration: "none" }}
-          >
-            Tasks
-          </Link>
-        </li>
+      <NavLink to="/projects" className="menu-item">
+        <FaProjectDiagram />
+        <span>Projects</span>
+      </NavLink>
 
-      </ul>
+      <NavLink to="/tasks" className="menu-item">
+        <FaTasks />
+        <span>Tasks</span>
+      </NavLink>
+
+      <NavLink to="/settings" className="menu-item">
+        <FaCog />
+        <span>Settings</span>
+      </NavLink>
+
     </div>
+
   );
+
 }
 
 export default Sidebar;

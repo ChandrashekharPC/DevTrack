@@ -1,0 +1,20 @@
+.recent-box {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,.08);
+}
+
+.recent-box h3 {
+    margin-bottom: 20px;
+}
+
+.recent-box ul {
+    list-style: none;
+    padding: 0;
+}
+
+.recent-box li {
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
