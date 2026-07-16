@@ -1,64 +1,110 @@
 import DashboardLayout from "../../layouts/DashboardLayout";
 import StatCard from "../../components/StatCard";
-
 import WelcomeBanner from "../../components/WelcomeBanner";
+import RecentTasks from "../../components/RecentTasks";
+import RecentProjects from "../../components/RecentProjects";
+
+import { useEffect, useState } from "react";
+import { getDashboardStats } from "../../services/dashboardService";
 
 import {
-  FaUsers,
-  FaProjectDiagram,
-  FaTasks,
-  FaCheckCircle
+    FaUsers,
+    FaProjectDiagram,
+    FaTasks,
+    FaCheckCircle
 } from "react-icons/fa";
 
 function Dashboard() {
 
-  return (
+    const [stats, setStats] = useState({
+        totalUsers: 0,
+        totalProjects: 0,
+        totalTasks: 0,
+        completedTasks: 0
+    });
 
-    <DashboardLayout>
+    useEffect(() => {
+        loadDashboard();
+    }, []);
 
-      <WelcomeBanner />
+    const loadDashboard = async () => {
 
-      <div
-        style={{
-          display:"grid",
-          gridTemplateColumns:"repeat(auto-fit,minmax(250px,1fr))",
-          gap:"25px"
-        }}
-      >
+        try {
 
-        <StatCard
-          title="Users"
-          value="12"
-          color="#2563EB"
-          icon={<FaUsers />}
-        />
+            const data = await getDashboardStats();
 
-        <StatCard
-          title="Projects"
-          value="6"
-          color="#22C55E"
-          icon={<FaProjectDiagram />}
-        />
+            setStats(data);
 
-        <StatCard
-          title="Tasks"
-          value="48"
-          color="#F59E0B"
-          icon={<FaTasks />}
-        />
+        } catch (error) {
 
-        <StatCard
-          title="Completed"
-          value="32"
-          color="#EF4444"
-          icon={<FaCheckCircle />}
-        />
+            console.log(error);
 
-      </div>
+        }
 
-    </DashboardLayout>
+    };
 
-  );
+    return (
+
+        <DashboardLayout>
+
+            <WelcomeBanner />
+
+            <div
+                style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fit,minmax(250px,1fr))",
+                    gap: "25px",
+                    marginBottom: "30px"
+                }}
+            >
+
+                <StatCard
+                    title="Users"
+                    value={stats.totalUsers}
+                    color="#2563EB"
+                    icon={<FaUsers />}
+                />
+
+                <StatCard
+                    title="Projects"
+                    value={stats.totalProjects}
+                    color="#22C55E"
+                    icon={<FaProjectDiagram />}
+                />
+
+                <StatCard
+                    title="Tasks"
+                    value={stats.totalTasks}
+                    color="#F59E0B"
+                    icon={<FaTasks />}
+                />
+
+                <StatCard
+                    title="Completed"
+                    value={stats.completedTasks}
+                    color="#EF4444"
+                    icon={<FaCheckCircle />}
+                />
+
+            </div>
+
+            <div
+                style={{
+                    display: "grid",
+                    gridTemplateColumns: "1fr 1fr",
+                    gap: "25px"
+                }}
+            >
+
+                <RecentTasks />
+
+                <RecentProjects />
+
+            </div>
+
+        </DashboardLayout>
+
+    );
 
 }
 

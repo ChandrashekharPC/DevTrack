@@ -1,12 +1,18 @@
+import { useNavigate } from "react-router-dom";
+import { FaBell, FaSearch, FaUserCircle, FaSignOutAlt } from "react-icons/fa";
 import "./Navbar.css";
 
-import {
-    FaBell,
-    FaSearch,
-    FaUserCircle
-} from "react-icons/fa";
-
 function Navbar(){
+
+    const navigate = useNavigate();
+
+    const logout = () => {
+
+        localStorage.removeItem("token");
+
+        navigate("/");
+
+    };
 
     return(
 
@@ -29,7 +35,17 @@ function Navbar(){
 
                 <FaUserCircle className="profile-icon"/>
 
-                <span>Chandrashekhar</span>
+                <span className="user-name">
+                    Chandrashekhar
+                </span>
+
+                <button
+                    className="logout-btn"
+                    onClick={logout}
+                >
+                    <FaSignOutAlt/>
+                    Logout
+                </button>
 
             </div>
 

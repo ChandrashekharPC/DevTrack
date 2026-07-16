@@ -63,3 +63,16 @@
     font-size:28px;
 
 }
+.stat-card{
+
+    transition:.35s;
+
+}
+
+.stat-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 18px 35px rgba(0,0,0,.12);
+
+}
