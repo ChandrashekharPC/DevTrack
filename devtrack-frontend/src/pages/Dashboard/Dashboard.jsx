@@ -7,6 +7,10 @@ import RecentProjects from "../../components/RecentProjects";
 import { useEffect, useState } from "react";
 import { getDashboardStats } from "../../services/dashboardService";
 
+import DashboardCharts from "../../components/DashboardCharts";
+
+import DashboardBarChart from "../../components/DashboardBarChart";
+
 import {
     FaUsers,
     FaProjectDiagram,
@@ -95,6 +99,20 @@ function Dashboard() {
                     gap: "25px"
                 }}
             >
+                <div
+                    style={{
+                        display: "grid",
+                        gridTemplateColumns: "1fr 1fr",
+                        gap: "25px",
+                        marginBottom: "30px"
+                    }}
+                >
+
+                    <DashboardCharts stats={stats} />
+
+                    <DashboardBarChart />
+
+                </div>
 
                 <RecentTasks />
 

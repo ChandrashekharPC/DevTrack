@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import { FaPlus, FaSearch, FaEdit, FaTrash } from "react-icons/fa";
 
 import { getTasks, deleteTask } from "../../services/taskService";
+import TaskModal from "../../components/TaskModal";
 
 import "./Tasks.css";
 
@@ -10,6 +12,8 @@ function Tasks() {
 
     const [tasks, setTasks] = useState([]);
     const [search, setSearch] = useState("");
+    const [showModal, setShowModal] = useState(false);
+    const [editTask, setEditTask] = useState(null);
 
     useEffect(() => {
         loadTasks();
@@ -27,6 +31,8 @@ function Tasks() {
 
             console.error(error);
 
+            toast.error("Unable to load tasks");
+
         }
 
     };
@@ -39,15 +45,38 @@ function Tasks() {
 
             await deleteTask(id);
 
+            toast.success("Task deleted successfully");
+
             loadTasks();
 
         } catch (error) {
 
             console.error(error);
 
-            alert("Unable to delete task");
+            toast.error("Unable to delete task");
 
         }
+
+    };
+
+    const openAddModal = () => {
+
+        setEditTask(null);
+        setShowModal(true);
+
+    };
+
+    const openEditModal = (task) => {
+
+        setEditTask(task);
+        setShowModal(true);
+
+    };
+
+    const closeModal = () => {
+
+        setShowModal(false);
+        setEditTask(null);
 
     };
 
@@ -65,7 +94,10 @@ function Tasks() {
 
                     <h2>Tasks</h2>
 
-                    <button className="add-btn">
+                    <button
+                        className="add-btn"
+                        onClick={openAddModal}
+                    >
                         <FaPlus />
                         <span>Add Task</span>
                     </button>
@@ -97,6 +129,11 @@ function Tasks() {
                             <h3>{task.title}</h3>
 
                             <p>
+                                <strong>Description :</strong><br />
+                                {task.description}
+                            </p>
+
+                            <p>
                                 <strong>Project :</strong>{" "}
                                 {task.project?.projectName}
                             </p>
@@ -108,28 +145,53 @@ function Tasks() {
 
                             <p>
                                 <strong>Status :</strong>{" "}
-                                {task.status}
+                                <span
+                                    className={`status-badge ${
+                                        task.status === "OPEN"
+                                            ? "status-open"
+                                            : task.status === "IN_PROGRESS"
+                                            ? "status-progress"
+                                            : "status-completed"
+                                    }`}
+                                >
+                                    {task.status.replace("_", " ")}
+                                </span>
                             </p>
 
                             <p>
                                 <strong>Priority :</strong>{" "}
-                                {task.priority}
+                                <span
+                                    className={`priority-badge ${
+                                        task.priority === "HIGH"
+                                            ? "priority-high"
+                                            : task.priority === "MEDIUM"
+                                            ? "priority-medium"
+                                            : "priority-low"
+                                    }`}
+                                >
+                                    {task.priority}
+                                </span>
                             </p>
 
                             <p>
-                                <strong>Due :</strong>{" "}
+                                <strong>Due Date :</strong>{" "}
                                 {task.dueDate}
                             </p>
 
                             <div className="task-buttons">
 
-                                <button className="edit-btn">
+                                <button
+                                    className="edit-btn"
+                                    onClick={() => openEditModal(task)}
+                                    title="Edit Task"
+                                >
                                     <FaEdit />
                                 </button>
 
                                 <button
                                     className="delete-btn"
                                     onClick={() => handleDelete(task.id)}
+                                    title="Delete Task"
                                 >
                                     <FaTrash />
                                 </button>
@@ -143,6 +205,16 @@ function Tasks() {
                 </div>
 
             </div>
+
+            {showModal && (
+
+                <TaskModal
+                    editTask={editTask}
+                    onClose={closeModal}
+                    onTaskAdded={loadTasks}
+                />
+
+            )}
 
         </DashboardLayout>
 

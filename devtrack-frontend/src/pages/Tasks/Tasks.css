@@ -105,3 +105,49 @@
 .delete-btn:hover{
     background:#dc2626;
 }
+
+/* ---------- Status Badge ---------- */
+
+.status-badge{
+    display:inline-block;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:600;
+    color:#fff;
+}
+
+.status-open{
+    background:#3B82F6;
+}
+
+.status-progress{
+    background:#F59E0B;
+}
+
+.status-completed{
+    background:#10B981;
+}
+
+/* ---------- Priority Badge ---------- */
+
+.priority-badge{
+    display:inline-block;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:600;
+    color:#fff;
+}
+
+.priority-high{
+    background:#EF4444;
+}
+
+.priority-medium{
+    background:#F97316;
+}
+
+.priority-low{
+    background:#22C55E;
+}
